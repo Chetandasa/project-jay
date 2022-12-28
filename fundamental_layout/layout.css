@@ -1,0 +1,205 @@
+/* ------------------------------------------- CSS from starting point CSS file ------------------------------------------- */
+
+body {
+  background-color: #fff;
+  color: #333;
+  margin: 0;
+  font: 1.2em / 1.2 Arial, Helvetica, sans-serif;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.logo {
+  font-size: 200%;
+  padding: 50px 20px;
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+.grid {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 980px;
+}
+
+nav {
+  background-color: #000;
+  padding: .5em;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: .5em 1em;
+}
+
+.photos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feature {
+    width: 200px;
+}
+
+/* ----------------------------------------------------- My own CSS, below ----------------------------------------------------- */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* ---------- Altering the default layout for mobile size ---------- */
+
+/* Center the first photo */
+.feature {
+    margin: 0 auto;
+}
+
+/* Make the photos in sidebar section sit next to each other using float (as fallback) and grid display */
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Like float:left, width:33.333% in float mode */
+  grid-gap: 1px;
+}
+
+.photos li {
+  float: left;
+  width: 33.333%;
+  padding: 0.5px; /* to make the gutters between photos the same as in grid layout (grid-gap: 1px) (0.5 + 0.5) */
+}
+
+/* clearfix hack although it's not necessary! */
+.photos::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+@supports (display: grid) {
+  .photos li {
+    width: auto;
+    padding: 0;
+  }
+}
+
+/* ------------------  layout for tablet size ------------------ */
+
+@media screen and (min-width: 40em) {
+
+  /* Make the navigation bar horizontal using float (as fallback) and flexbox */
+  nav ul {
+    display: flex;
+    overflow: auto; /* ????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+This is because I've used float:left for nav li below (as fallback if flexbox is not supported)
+which makes links out of document normal layout flow so they're not contained in ul and nav element
+width black background so I should use clearfix hack or overflow or display:flow-root, but I think the best choice
+might be overflow:auto. If I use display:flow-root it interfers with display:flex. And if I use clearfix hack
+so I'm adding an extra element in my ul after the last li but as I'm going to use justify-content:space-between
+for desktop size below, the spacing doesn't look as it should becuase there's an extra empty element after
+the last navigation link. ????????? Overflow:auto makes chrome show scroll bar in navigation and
+in Firefox it doesn't show the scroll bar but you can still use scroll wheel to scroll in navigation bar.
+Is there any other way to fix this? */
+  }
+
+  nav li {
+    float: left;
+  }
+
+  /* Make the first photo float to left and the text wrap around */
+  .feature {
+    float: left;
+    margin: 0 10px 0 0;
+  }
+
+  /* Make the photos in sidebar section sit next to each other in 4 columns instead of 3 columns - using float (as fallback) and grid display */
+  .photos li {
+    width: 25%;
+  }
+
+  @supports (display: grid) {
+    .photos {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .photos li {
+      width: auto;
+    }
+  }
+}
+
+/* ------------------- layout for desktop size ------------------- */
+
+@media screen and (min-width: 60em) {
+  /* Center the links */
+  nav ul {
+    justify-content: space-between;
+  }
+
+  /* ????????????????????????????????????????????????????????????????
+  I used the rule below to implement same effect as justify-content:space-between using float
+  but the result is not the exactly the same. the first and last links mobe inwards.
+  How can I implement the same effect? */
+  nav li {
+    width: 20%;
+    text-align: center;
+  }
+
+  @supports (display: flex) {
+    nav li {
+      width: auto;
+    }
+  }
+
+  /* Create two-column layout - article and aside sit next to each other - using float (as fallback) and grid display */
+  .grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-column-gap: 10px;
+  }
+
+  article {
+    float: left;
+    width: 68%;
+  }
+  
+  aside {
+    float: right;
+    width: 28%;
+  }
+
+  .photos li {
+    width: 50%;
+  }
+
+  @supports (display: grid) {
+    article, aside {
+      width: auto;
+    }
+
+    .photos li {
+      width: auto;
+    }
+
+    .photos {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+  }
+}
