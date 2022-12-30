@@ -1,0 +1,88 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+h2{
+  color: yellow;
+  text-align: center;
+  font-size: 58px;
+}
+h2::before{
+  content: "aga";
+}
+h2::after{
+  content: "pore";
+}
+
+p{
+  text-align: center;
+  font-size: 39px;
+}
+
+
+p::before{
+  content: '"';
+}
+p::after{
+  content: ' "';
+}
+
+.div{
+  text-align: center;
+}
+.div .batton{
+  display: inline-block;
+  color: white;
+  background-color: teal;
+  font-size: 40px;
+  margin-top: 100px;
+  text-decoration: none;
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.batton::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: red;
+  border-radius: 20px;
+  transition: .6s;
+  z-index: -1;
+}
+.batton:hover::before{
+  width: 100%;
+
+
+}
+
+ul{
+  /* text-align: center; */
+  margin-top: 90px;
+  margin-left: 300px;
+  list-style: none;
+  
+}
+ul li{
+  font-size: 20px;
+
+ 
+}
+
+li::before{
+  content: "\f00c ";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: rgb(16, 235, 63);
+  background-color: rgb(247, 75, 75);
+  margin-left: 5px;
+}
+.ppp{
+  height: 555px;
+}
