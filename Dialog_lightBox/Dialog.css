@@ -1,0 +1,62 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  padding-block: 2rem;
+}
+
+.gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: row dense;
+
+  width: 90%;
+  margin: auto;
+
+  > :nth-child(7n + 1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  img {
+    display: block;
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+}
+
+dialog.lightbox {
+  border: none;
+  padding: 0;
+  animation: fadeIn 0.3s ease-out;
+
+  &::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  img {
+    object-fit: contain;
+    display: block;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    max-width: 90vw;
+    max-width: 90dvw;
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
